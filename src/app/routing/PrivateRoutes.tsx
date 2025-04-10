@@ -14,6 +14,7 @@ import Paiement from "../modules/arrivages/Paiement ";
 import Logistique from "../modules/arrivages/Logistique";
 import Planning from "../modules/arrivages/Planning";
 
+
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import("../modules/profile/ProfilePage"));
   const WizardsPage = lazy(() => import("../modules/wizards/WizardsPage"));
@@ -58,38 +59,41 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
-        <Route
+        <Route path='menu-test' element={<MenuTestPage />} />
+        {/* Lazy Modules */}
+
+<!--         <Route
           path="crafted/widgets/*"
           element={
             <SuspensedView>
               <WidgetsPage />
             </SuspensedView>
           }
-        />
-        <Route
+        /> -->
+<!--         <Route
           path="crafted/account/*"
           element={
             <SuspensedView>
               <AccountPage />
             </SuspensedView>
           }
-        />
-        <Route
+        /> -->
+<!--         <Route
           path="apps/chat/*"
           element={
             <SuspensedView>
               <ChatPage />
             </SuspensedView>
           }
-        />
-        <Route
+        /> -->
+<!--         <Route
           path="apps/user-management/*"
           element={
             <SuspensedView>
               <UsersPage />
             </SuspensedView>
           }
-        /> */}
+        /> */} -->
 
         {/* <Route
   path='pays'

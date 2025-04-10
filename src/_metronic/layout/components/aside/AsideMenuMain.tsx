@@ -3,6 +3,7 @@ import { KTIcon } from "../../../helpers";
 import { AsideMenuItemWithSub } from "./AsideMenuItemWithSub";
 import { AsideMenuItem } from "./AsideMenuItem";
 
+
 interface AsideMenuMainProps {
   isCollapsed?: boolean;
 }
@@ -70,3 +71,4 @@ export function AsideMenuMain({ isCollapsed = false }: AsideMenuMainProps) {
     </>
   );
 }
+
