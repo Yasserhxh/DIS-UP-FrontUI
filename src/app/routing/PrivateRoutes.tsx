@@ -43,7 +43,7 @@ const PrivateRoutes = () => {
         /> */}
 
         {/* <Route path="menu-test" element={<MenuTestPage />} /> */}
-<!--         />
+        {/* />
         <Route
           path='addFournisseur'
           element={
@@ -75,7 +75,7 @@ const PrivateRoutes = () => {
               <UpdateFournisseurPage/>
             </SuspensedView>
           }
-        /> -->
+        /> */}
         
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}
