@@ -12,6 +12,7 @@ import AddArrivage from "../modules/arrivages/AddArrivage";
 import Consultation from "../modules/arrivages/Consultation";
 import Paiement from "../modules/arrivages/Paiement ";
 import Logistique from "../modules/arrivages/Logistique";
+import Planning from "../modules/arrivages/Planning";
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import("../modules/profile/ProfilePage"));
@@ -104,6 +105,14 @@ const PrivateRoutes = () => {
           element={
             <SuspensedView>
               <Arrivage />
+            </SuspensedView>
+          }
+        />
+                <Route
+          path="planning"
+          element={
+            <SuspensedView>
+              <Planning />
             </SuspensedView>
           }
         />

@@ -44,12 +44,18 @@ export function AsideMenuMain({ isCollapsed = false }: AsideMenuMainProps) {
       </AsideMenuItemWithSub>
       </AsideMenuItemWithSub> */}
 
+
       <AsideMenuItemWithSub
         to="#"
         icon="shield-tick"
         title="Gestion d'arrivage "
         isCollapsed={isCollapsed}
       >
+        <AsideMenuItem
+          to="/planning"
+          title="Planning d’arrivage"
+          isCollapsed={isCollapsed}
+        />
         <AsideMenuItem
           to="/addarrivage"
           title="Création d'arrivage"
