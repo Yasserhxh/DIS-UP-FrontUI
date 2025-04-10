@@ -62,38 +62,38 @@ const PrivateRoutes = () => {
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}
 
-<!--         <Route
+         <Route
           path="crafted/widgets/*"
           element={
             <SuspensedView>
               <WidgetsPage />
             </SuspensedView>
           }
-        /> -->
-<!--         <Route
+        /> 
+         <Route
           path="crafted/account/*"
           element={
             <SuspensedView>
               <AccountPage />
             </SuspensedView>
           }
-        /> -->
-<!--         <Route
+        /> 
+         <Route
           path="apps/chat/*"
           element={
             <SuspensedView>
               <ChatPage />
             </SuspensedView>
           }
-        /> -->
-<!--         <Route
+        /> 
+         <Route
           path="apps/user-management/*"
           element={
             <SuspensedView>
               <UsersPage />
             </SuspensedView>
           }
-        /> */} -->
+        />  
 
         {/* <Route
   path='pays'
