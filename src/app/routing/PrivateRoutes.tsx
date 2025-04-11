@@ -12,8 +12,7 @@ import AddArrivage from "../modules/arrivages/AddArrivage";
 import Consultation from "../modules/arrivages/Consultation";
 import Paiement from "../modules/arrivages/Paiement ";
 import Logistique from "../modules/arrivages/Logistique";
-
-
+import Planning from "../modules/arrivages/Planning";
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import("../modules/profile/ProfilePage"));
@@ -29,7 +28,7 @@ const PrivateRoutes = () => {
     <Routes>
       <Route element={<MasterLayout />}>
         {/* Redirect to Dashboard after success login/registartion */}
-        <Route path="auth/*" element={<Navigate to="/dashboard" />} />
+        <Route path="auth/*" element={<Navigate to="/arrivage" />} />
         {/* Pages */}
         <Route path="dashboard" element={<DashboardWrapper />} />
         {/* <Route
@@ -42,7 +41,7 @@ const PrivateRoutes = () => {
         /> */}
 
         {/* <Route path="menu-test" element={<MenuTestPage />} /> */}
-<!--         />
+        {/* />
         <Route
           path='addFournisseur'
           element={
@@ -74,9 +73,9 @@ const PrivateRoutes = () => {
               <UpdateFournisseurPage/>
             </SuspensedView>
           }
-        /> -->
-        
-        <Route path='menu-test' element={<MenuTestPage />} />
+        /> */}
+
+        <Route path="menu-test" element={<MenuTestPage />} />
         {/* Lazy Modules */}
         {/* <Route
           path="crafted/pages/profile/*"
@@ -97,53 +96,61 @@ const PrivateRoutes = () => {
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}
 
-<!--         <Route
+        <Route
           path="crafted/widgets/*"
           element={
             <SuspensedView>
               <WidgetsPage />
             </SuspensedView>
           }
-        /> -->
-<!--         <Route
+        />
+        <Route
           path="crafted/account/*"
           element={
             <SuspensedView>
               <AccountPage />
             </SuspensedView>
           }
-        /> -->
-<!--         <Route
+        />
+        <Route
           path="apps/chat/*"
           element={
             <SuspensedView>
               <ChatPage />
             </SuspensedView>
           }
-        /> -->
-<!--         <Route
+        />
+        <Route
           path="apps/user-management/*"
           element={
             <SuspensedView>
               <UsersPage />
             </SuspensedView>
           }
-        /> */} -->
+        />
 
         {/* <Route
-  path='pays'
-  element={
-    <SuspensedView>
-      <Pays />
-    </SuspensedView>
-  }
-/> */}
+                path='pays'
+                element={
+                  <SuspensedView>
+                    <Pays />
+                  </SuspensedView>
+                }
+              /> */}
 
         <Route
           path="arrivage"
           element={
             <SuspensedView>
               <Arrivage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path="planning"
+          element={
+            <SuspensedView>
+              <Planning />
             </SuspensedView>
           }
         />
@@ -163,7 +170,7 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
-                <Route
+        <Route
           path="/paiement/:id"
           element={
             <SuspensedView>
@@ -171,7 +178,7 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
-                        <Route
+        <Route
           path="/logistique/:id"
           element={
             <SuspensedView>
