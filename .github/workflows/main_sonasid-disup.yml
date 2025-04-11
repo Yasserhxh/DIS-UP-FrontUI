@@ -1,64 +1,61 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - sonasid-disup
+name: CI/CD Workflow for sonasid-disup
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PROJECT_DIR: .       # Change if your project lives in a subdirectory
+  APP_NAME: sonasid-disup
 
 jobs:
-  build:
+  Build_And_Test:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read #This is required for actions/checkout
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '20'
 
-      - name: npm install, build, and test
-        run: |
-          npm install --legacy-peer-deps
-          npm run build --if-present
-          npm run test --if-present
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+        working-directory: ${{ env.PROJECT_DIR }}
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+      - name: Build application
+        run: npm run build --if-present
+        working-directory: ${{ env.PROJECT_DIR }}
 
-      - name: Upload artifact for deployment job
+      - name: Archive Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
-          path: release.zip
+          name: build-artifacts
+          path: ${{ env.PROJECT_DIR }}/dist
 
-  deploy:
+  Deploy_On_Development:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
-    needs: build
+    needs: [Build_And_Test]
     environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+      name: Production
     steps:
-      - name: Download artifact from build job
+      - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
-          name: node-app
+          name: build-artifacts
+          path: ${{ env.PROJECT_DIR }}/dist
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-      
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'sonasid-disup'
-          slot-name: 'Production'
-          package: .
+          app-name: ${{ env.APP_NAME }}
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_55EA0D267664432DB6C85FC6FD7D0239 }}
+          package: ${{ env.PROJECT_DIR }}/dist
