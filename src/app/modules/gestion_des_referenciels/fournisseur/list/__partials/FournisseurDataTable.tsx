@@ -7,7 +7,7 @@ import { BsFileEarmarkText, BsPencilSquare, BsTrash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 interface Fournisseur {
-  Id: any;
+  Id: string;
   Nom: string;
   ICE: string;
   PaysId: string;
@@ -57,39 +57,55 @@ const FournisseurDataTable: React.FC<PaysDataTableProps> = ({
   const navigate = useNavigate();
 
   const ActionsTemplate = (rowData: Fournisseur) => {
-    return (    
-    <Dropdown align="end">
-      <Dropdown.Toggle
-        variant="light"
-        size="sm"
-        className="border-0 no-caret-toggle"
-      >
-        <i className="bi bi-three-dots-vertical"></i>
-      </Dropdown.Toggle>
+    return (
+      <Dropdown align="end">
+        <Dropdown.Toggle
+          variant="light"
+          size="sm"
+          className="border-0 no-caret-toggle"
+        >
+          <i className="bi bi-three-dots-vertical"></i>
+        </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        <Dropdown.Header>Actions</Dropdown.Header>
+        <Dropdown.Menu>
+          <Dropdown.Header>Actions</Dropdown.Header>
 
-        <Dropdown.Item onClick={() => navigate(`/details_fournisseurs`)}>
-          <BsFileEarmarkText className="me-2" /> Détails
-        </Dropdown.Item>
-        <Dropdown.Item onClick={() => navigate(`/Modifier_fournisseurs`)}>
-          <BsPencilSquare className="me-2" /> Modifier
-        </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              console.log("Navigating to details for ID:", rowData.Id);
+              navigate(`/details_fournisseurs/${rowData.Id}`); // Updated to plural
+            }}
+          >
+            <BsFileEarmarkText className="me-2" /> Détails
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              console.log("Navigating to edit for ID:", rowData.Id);
+              navigate(`/details-fournisseur/${rowData.Id}/edit`); // Matches the route
+            }}
+          >
+            <BsPencilSquare className="me-2" /> Modifier
+          </Dropdown.Item>
 
-        <Dropdown.Divider />
+          <Dropdown.Divider />
 
-        <Dropdown.Item className="text-danger" onClick={() => onDelete(rowData.Id)}>
-          <BsTrash className="me-2" /> Supprimer
-        </Dropdown.Item>
-      </Dropdown.Menu>
+          <Dropdown.Item
+            className="text-danger"
+            onClick={() => {
+              console.log("Deleting ID:", rowData.Id);
+              onDelete(rowData.Id);
+            }}
+          >
+            <BsTrash className="me-2" /> Supprimer
+          </Dropdown.Item>
+        </Dropdown.Menu>
 
-      <style>{`
-        .no-caret-toggle::after {
-          display: none !important;
-        }
-      `}</style>
-    </Dropdown>
+        <style>{`
+          .no-caret-toggle::after {
+            display: none !important;
+          }
+        `}</style>
+      </Dropdown>
     );
   };
 
@@ -175,7 +191,7 @@ const FournisseurDataTable: React.FC<PaysDataTableProps> = ({
           header="Actions"
           body={(rowData) => ActionsTemplate(rowData)}
           style={{ textAlign: "center", width: "6rem" }}
-        /> 
+        />
       </DataTable>
     </div>
   );

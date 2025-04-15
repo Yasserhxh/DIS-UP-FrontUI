@@ -13,6 +13,15 @@ import Consultation from "../modules/arrivages/Consultation";
 import Paiement from "../modules/arrivages/Paiement ";
 import Logistique from "../modules/arrivages/Logistique";
 
+/* Import Fournisseur Start */
+import FournisseurPage from "../modules/gestion_des_referenciels/fournisseur/list/Fournisseur";
+import AddFournisseurPage from "../modules/gestion_des_referenciels/fournisseur/add/AddFournisseur";
+import DetailsFournisseurPage from "../modules/gestion_des_referenciels/fournisseur/details/DetailsFournisseur";
+/* Import Fournisseur End */
+
+
+/* Import Pays End */
+        
 
 
 const PrivateRoutes = () => {
@@ -42,16 +51,9 @@ const PrivateRoutes = () => {
         /> */}
 
         {/* <Route path="menu-test" element={<MenuTestPage />} /> */}
-<!--         />
+
+        {/* Route To Fournisseur Start */}    
         <Route
-          path='addFournisseur'
-          element={
-            <SuspensedView>
-              <AddFournisseurPage/>
-            </SuspensedView>
-          }
-        />        
-         <Route
           path='liste_fournisseurs'
           element={
             <SuspensedView>
@@ -60,7 +62,15 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='details_fournisseurs'
+          path='addFournisseur'
+          element={
+            <SuspensedView>
+              <AddFournisseurPage/>
+            </SuspensedView>
+          }
+        />  
+        <Route
+          path='details_fournisseurs/:id'
           element={
             <SuspensedView>
               <DetailsFournisseurPage/>
@@ -68,76 +78,53 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='Modifier_fournisseurs'
+          path='details_fournisseurs/:id/edit'
           element={
             <SuspensedView>
-              <UpdateFournisseurPage/>
-            </SuspensedView>
-          }
-        /> -->
-        
-        <Route path='menu-test' element={<MenuTestPage />} />
-        {/* Lazy Modules */}
-        {/* <Route
-          path="crafted/pages/profile/*"
-          element={
-            <SuspensedView>
-              <ProfilePage />
+              <DetailsFournisseurPage/>
             </SuspensedView>
           }
         />
-        <Route
-          path="crafted/pages/wizards/*"
-          element={
-            <SuspensedView>
-              <WizardsPage />
-            </SuspensedView>
-          }
-        />
-        <Route path='menu-test' element={<MenuTestPage />} />
-        {/* Lazy Modules */}
+        {/* Route To Fournisseur End */} 
 
-<!--         <Route
+
+        
+         
+
+        <Route path='menu-test' element={<MenuTestPage />} />
+        
+        <Route
           path="crafted/widgets/*"
           element={
             <SuspensedView>
               <WidgetsPage />
             </SuspensedView>
           }
-        /> -->
-<!--         <Route
+        /> 
+        <Route
           path="crafted/account/*"
           element={
             <SuspensedView>
               <AccountPage />
             </SuspensedView>
           }
-        /> -->
-<!--         <Route
+        /> 
+      <Route
           path="apps/chat/*"
           element={
             <SuspensedView>
               <ChatPage />
             </SuspensedView>
           }
-        /> -->
-<!--         <Route
+        />
+       <Route
           path="apps/user-management/*"
           element={
             <SuspensedView>
               <UsersPage />
             </SuspensedView>
           }
-        /> */} -->
-
-        {/* <Route
-  path='pays'
-  element={
-    <SuspensedView>
-      <Pays />
-    </SuspensedView>
-  }
-/> */}
+        /> 
 
         <Route
           path="arrivage"

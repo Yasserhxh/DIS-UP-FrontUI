@@ -12,22 +12,20 @@ export function AsideMenuMain({ isCollapsed = false }: AsideMenuMainProps) {
   const intl = useIntl();
 
   return (
-    <>
-     
+    <>    
       
         <AsideMenuItemWithSub
           to="#"
           icon="shield-tick"
-          title="Gestion des Fournisseurs"
+          title="Gestion des référentiels"
           isCollapsed={isCollapsed}
         >
           <AsideMenuItemWithSub
-        to="#"
-        icon="shield-tick"
-        title="Gestion des référentiels "
-        isCollapsed={isCollapsed}
-      >
-
+            to="#"
+            icon="shield-tick"
+            title="Gestion des Fournisseurs"
+            isCollapsed={isCollapsed}
+          >
           <AsideMenuItem
             to="/addFournisseur"
             icon="plus"
@@ -48,17 +46,19 @@ export function AsideMenuMain({ isCollapsed = false }: AsideMenuMainProps) {
           isCollapsed={isCollapsed}
         >
           <AsideMenuItem
-            to="#"
+            to="addPays"
             icon="plus"
             title="Création d'un pays"
             isCollapsed={isCollapsed}
           />
           <AsideMenuItem
-            to="#"
+            to="liste_Pays"
             icon="list"
             title="Liste des pays"
             isCollapsed={isCollapsed}
           />
+        </AsideMenuItemWithSub>
+        </AsideMenuItemWithSub>
       <AsideMenuItemWithSub
         to="#"
         icon="shield-tick"
