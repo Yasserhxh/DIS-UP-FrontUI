@@ -11,24 +11,60 @@ import {
   Col,
   Spinner,
 } from "react-bootstrap";
-import { BsSearch, BsThreeDotsVertical, BsUpload } from "react-icons/bs";
+import {
+  BsFileEarmarkText,
+  BsSearch,
+  BsThreeDotsVertical,
+  BsTrash,
+  BsUpload,
+} from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 const AddArrivage: React.FC = () => {
-
   const [searchCommandeQuery, setSearchCommandeQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("infosContrat");
+  const [activeTab, setActiveTab] = useState("nominationNavire");
   const [typeDocument, setTypeDocument] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
-  const handleUploadClick = () => {
+  const [typeDocumentNavire, setTypeDocumentNavire] = useState("");
+  const [documentsNomination, setDocumentsNomination] = useState<File[]>([]);
+  const [documentsQualification, setDocumentsQualification] = useState<File[]>(
+    []
+  );
+
+  const [qualificationForm, setQualificationForm] = useState({
+    date: "",
+    conforme: false,
+    commentaire: "",
+  });
+  const [qualificationHistorique, setQualificationHistorique] = useState<any[]>(
+    []
+  );
+
+  const [typePieceQualification, setTypePieceQualification] = useState("");
+  const [surveillants, setSurveillants] = useState<any[]>([]);
+  const [surveillantForm, setSurveillantForm] = useState({ pays: "", nom: "" });
+  const handleUploadClick = (context: "nomination" | "qualification") => {
     if (fileInputRef.current) {
-      fileInputRef.current.click();
+      fileInputRef.current.onchange = (e: any) => {
+        const files = Array.from(e.target.files as File[]);
+        if (files.length) {
+          if (context === "nomination") {
+            setDocumentsNomination((prev) => [...prev, ...files]);
+          } else if (context === "qualification") {
+            setDocumentsQualification((prev) => [...prev, ...files]);
+          }
+        }
+        e.target.value = ""; // ✅ maintenant dans la portée
+      };
+
+      fileInputRef.current.click(); // ✅ toujours ici
     }
   };
 
+  const paysOptions = ["Maroc", "France", "Espagne", "Italie"];
+  const surveillantOptions = ["SGS Maroc", "Bureau Veritas", "Intertek"];
   const [commandes, setCommandes] = useState<
     {
       id: string;
@@ -44,9 +80,9 @@ const AddArrivage: React.FC = () => {
     }[]
   >([]);
 
-
-
-
+  const removeSurveillant = (index: number) => {
+    setSurveillants((prev) => prev.filter((_, i) => i !== index));
+  };
 
   const handleSearchCommande = () => {
     setIsSearching(true);
@@ -282,220 +318,6 @@ const AddArrivage: React.FC = () => {
                   </Form.Group>
                 </Col>
               </Row>
-{/* Onglets Logistique supplémentaires */}
-<div className="flex flex-wrap space-x-2 border-bottom pb-2 mt-4">
-  {[
-    { id: "infosContrat", label: "Informations du contrat" },
-    { id: "nominationNavire", label: "Nomination du navire" },
-  ].map((tab) => (
-    <button
-      key={tab.id}
-      type="button"
-      onClick={() => setActiveTab(tab.id)}
-      className={`btn btn-sm me-2 ${
-        activeTab === tab.id ? "btn-primary" : "btn-outline-secondary"
-      }`}
-    >
-      {tab.label}
-    </button>
-  ))}
-</div>
-
-<div className="border rounded p-4 mt-3">
-  {/* Onglet : Informations du contrat */}
-  {activeTab === "infosContrat" && (
-    <div className="space-y-6">
-      <Row className="mb-3">
-        <Col md={4}>
-          <Form.Group>
-            <Form.Label>Date limite de chargement *</Form.Label>
-            <Form.Control type="date" name="dateLimiteChargement" required />
-          </Form.Group>
-        </Col>
-        <Col md={4}>
-          <Form.Group>
-            <Form.Label>Taux de déchargement *</Form.Label>
-            <Form.Control type="text" name="tauxDechargement" required />
-          </Form.Group>
-        </Col>
-      </Row>
-
-      <Row className="mb-3">
-        <Col md={2}>
-          <Form.Check
-            type="checkbox"
-            label="Half Dispatch"
-            name="halfDispatch"
-          />
-        </Col>
-        <Col md={2}>
-          <Form.Check
-            type="checkbox"
-            label="Demurrage"
-            name="demurrage"
-          />
-        </Col>
-      </Row>
-
-      <Row className="mb-3">
-        <Col md={4}>
-          <Form.Group>
-            <Form.Label>Port de chargement</Form.Label>
-            <Form.Select name="portChargement">
-              <option value="">Sélectionner un port</option>
-              <option value="Casablanca">Casablanca</option>
-              <option value="Jorf Lasfar">Jorf Lasfar</option>
-            </Form.Select>
-          </Form.Group>
-        </Col>
-      </Row>
-
-      {/* Téléversement document ici */}
-      <Row className="mb-3 align-items-end">
-        <Col md={10}>
-          <Form.Group>
-            <Form.Label>Type de document</Form.Label>
-            <Form.Select
-              name="typeDocumentContrat"
-              value={typeDocument}
-              onChange={(e) => setTypeDocument(e.target.value)}
-            >
-              <option value="">Sélectionner un type de document</option>
-              <option value="facture">Facture proforma</option>
-              <option value="contrat">Contrat</option>
-              <option value="lc">Demande LC / Engagement d'import</option>
-              <option value="licence">Licence d'import</option>
-              <option value="radio">Certificat non-radioactif</option>
-              <option value="explosif">Certificat non-explosif</option>
-            </Form.Select>
-          </Form.Group>
-        </Col>
-
-        <Col md={2}>
-          <Button
-            style={{ backgroundColor: "#fc5421", borderColor: "#fc5421" }}
-            className="w-100 d-flex align-items-center justify-content-center text-white"
-            onClick={handleUploadClick}
-            disabled={typeDocument === ""}
-          >
-            <BsUpload className="me-2" />
-            Télécharger
-          </Button>
-          <Form.Control
-            type="file"
-            ref={fileInputRef}
-            name="documentContrat"
-            style={{ display: "none" }}
-          />
-        </Col>
-      </Row>
-    </div>
-  )}
-
-  {/* Onglet : Nomination du navire */}
-  {activeTab === "nominationNavire" && (
-    <div className="space-y-6">
-      <Row className="mb-3">
-        <Col md={4}>
-          <Form.Group>
-            <Form.Label>Compagnie maritime</Form.Label>
-            <Form.Control type="text" name="compagnieMaritime" />
-          </Form.Group>
-        </Col>
-        <Col md={4}>
-          <Form.Group>
-            <Form.Label>Nom du navire</Form.Label>
-            <Form.Control type="text" name="nomNavire" />
-          </Form.Group>
-        </Col>
-      </Row>
-
-      <Row className="mb-3">
-        <Col md={4}>
-          <Form.Label>Date début chargement (LAYCAN)</Form.Label>
-          <Form.Control type="date" name="dateDebutLaycan" />
-        </Col>
-        <Col md={4}>
-          <Form.Label>Date fin chargement (LAYCAN)</Form.Label>
-          <Form.Control type="date" name="dateFinLaycan" />
-        </Col>
-      </Row>
-
-      <Row className="mb-3">
-        <Col md={4}>
-          <Form.Label>Date de départ port origine</Form.Label>
-          <Form.Control type="date" name="dateDepartPortOrigine" />
-        </Col>
-        <Col md={4}>
-          <Form.Label>Date d'arrivée port EL JORF</Form.Label>
-          <Form.Control type="date" name="dateArriveePortJorf" />
-        </Col>
-      </Row>
-
-      <Row className="mb-3">
-        <Col md={4}>
-          <Form.Label>Taux de déchargement</Form.Label>
-          <Form.Control type="text" name="tauxDechargementNavire" />
-        </Col>
-        <Col md={4}>
-          <Form.Label>Demurrage Rate</Form.Label>
-          <Form.Control type="text" name="demurrageRate" />
-        </Col>
-      </Row>
-
-      <Row className="mb-3">
-        <Col md={2}>
-          <Form.Check
-            type="checkbox"
-            label="Éligible Half Dispatch"
-            name="eligibleHalfDispatch"
-          />
-        </Col>
-        <Col md={4}>
-          <Form.Label>Montant Demurrage</Form.Label>
-          <Form.Control type="number" name="montantDemurrage" />
-        </Col>
-      </Row>
-
-      {/* Téléversement document nomination */}
-      <Row className="mb-3 align-items-end">
-        <Col md={10}>
-          <Form.Group>
-            <Form.Label>Type de document</Form.Label>
-            <Form.Select
-              name="typeDocumentNavire"
-              value={typeDocument}
-              onChange={(e) => setTypeDocument(e.target.value)}
-            >
-              <option value="">Sélectionner un type de document</option>
-              <option value="charter_party">Charter Party</option>
-              <option value="declaration_navire">Déclaration Navire</option>
-              <option value="certificat">Certificat</option>
-            </Form.Select>
-          </Form.Group>
-        </Col>
-
-        <Col md={2}>
-          <Button
-            style={{ backgroundColor: "#fc5421", borderColor: "#fc5421" }}
-            className="w-100 d-flex align-items-center justify-content-center text-white"
-            onClick={handleUploadClick}
-            disabled={typeDocument === ""}
-          >
-            <BsUpload className="me-2" />
-            Télécharger
-          </Button>
-          <Form.Control
-            type="file"
-            ref={fileInputRef}
-            name="documentNomination"
-            style={{ display: "none" }}
-          />
-        </Col>
-      </Row>
-    </div>
-  )}
-</div>
 
               <div className="text-end mb-4  mt-10">
                 <button

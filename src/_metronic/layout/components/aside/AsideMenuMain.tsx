@@ -12,6 +12,7 @@ export function AsideMenuMain({ isCollapsed = false }: AsideMenuMainProps) {
   const intl = useIntl();
 
   return (
+
     <>    
       
         <AsideMenuItemWithSub
@@ -39,32 +40,32 @@ export function AsideMenuMain({ isCollapsed = false }: AsideMenuMainProps) {
             isCollapsed={isCollapsed}
           />
         </AsideMenuItemWithSub>
-        <AsideMenuItemWithSub
-          to="#"
-          icon="shield-tick"
-          title="Gestion des pays"
-          isCollapsed={isCollapsed}
-        >
-          <AsideMenuItem
-            to="addPays"
-            icon="plus"
-            title="Création d'un pays"
-            isCollapsed={isCollapsed}
-          />
-          <AsideMenuItem
-            to="liste_Pays"
-            icon="list"
-            title="Liste des pays"
-            isCollapsed={isCollapsed}
-          />
+       
         </AsideMenuItemWithSub>
-        </AsideMenuItemWithSub>
+
+    <>
+      {/* <AsideMenuItem
+        to="/dashboard"
+        icon="element-11"
+        title={intl.formatMessage({ id: 'MENU.DASHBOARD' })}
+      /> */}
+      {/* <AsideMenuItem to="/builder" icon="switch" title="Layout Builder" /> */}
+
+      
+
+
+
       <AsideMenuItemWithSub
         to="#"
         icon="shield-tick"
         title="Gestion d'arrivage "
         isCollapsed={isCollapsed}
       >
+        <AsideMenuItem
+          to="/planning"
+          title="Planning d’arrivage"
+          isCollapsed={isCollapsed}
+        />
         <AsideMenuItem
           to="/addarrivage"
           title="Création d'arrivage"
