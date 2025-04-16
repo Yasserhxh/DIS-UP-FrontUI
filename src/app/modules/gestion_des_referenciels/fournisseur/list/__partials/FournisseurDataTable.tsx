@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { Menu } from "primereact/menu";
+
 import { Dropdown } from "react-bootstrap";
 import { BsFileEarmarkText, BsPencilSquare, BsTrash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +35,6 @@ const FournisseurDataTable: React.FC<PaysDataTableProps> = ({
 }) => {
   const [first, setFirst] = useState(0);
   const pageSize = 10;
-  const menuRefs = useRef<{ [key: number]: Menu | null }>({});
 
   const StatutTemplate = (rowData: Fournisseur) => {
     const getBadgeClass = (status: string) => {
@@ -73,7 +72,7 @@ const FournisseurDataTable: React.FC<PaysDataTableProps> = ({
           <Dropdown.Item
             onClick={() => {
               console.log("Navigating to details for ID:", rowData.Id);
-              navigate(`/details_fournisseurs/${rowData.Id}`); // Updated to plural
+              navigate(`/details-fournisseur/${rowData.Id}`); // Updated to plural
             }}
           >
             <BsFileEarmarkText className="me-2" /> Détails

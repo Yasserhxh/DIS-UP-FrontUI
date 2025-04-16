@@ -101,16 +101,16 @@ const DetailsFournisseur: React.FC = () => {
     fetchFournisseurDetails();
   }, [id, isEditing]);
 
-  const getBadgeClass = (status: string) => {
-    switch (status) {
-      case "activé":
-        return "badge badge-success";
-      case "non activé":
-        return "badge badge-danger";
-      default:
-        return "badge badge-secondary";
-    }
-  };
+  // const getBadgeClass = (status: string) => {
+  //   switch (status) {
+  //     case "activé":
+  //       return "badge badge-success";
+  //     case "non activé":
+  //       return "badge badge-danger";
+  //     default:
+  //       return "badge badge-secondary";
+  //   }
+  // };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -128,7 +128,7 @@ const DetailsFournisseur: React.FC = () => {
 
   const handleEditToggle = () => {
     // Navigate to edit mode
-    navigate(`/details_fournisseurs/${id}/edit`);
+    navigate(`/details-fournisseur/${id}/edit`);
   };
 
   const handleCancel = () => {
@@ -141,10 +141,10 @@ const DetailsFournisseur: React.FC = () => {
         bancaire: false,
         additionnelle: false,
       });
-      navigate(`/details_fournisseurs/${id}`); // Updated to plural
+      navigate(`/details-fournisseur/${id}`); // Updated to plural
     } else {
       // If in view mode, go back to the list
-      navigate("/liste_fournisseurs");
+      navigate("/fournisseurs");
     }
   };
 

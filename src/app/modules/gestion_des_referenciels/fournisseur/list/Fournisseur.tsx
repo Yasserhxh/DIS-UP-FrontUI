@@ -99,7 +99,7 @@ const Fournisseur: React.FC = () => {
     setLoading(false);
   }, []);
 
-  const handleSearch = (term: string, status: string, view?: string) => {
+  const handleSearch = (term: string, status: string) => {
     const lowerTerm = term.toLowerCase();
     const filteredData = fournisseurs.filter((item) => {
       const matchesTerm =
@@ -121,7 +121,7 @@ const Fournisseur: React.FC = () => {
 
   const translate = (key: string) => key;
   const handleAddClick = () => {
-    navigate("/addFournisseur");
+    navigate("/add-Fournisseur");
   };
 
   return (

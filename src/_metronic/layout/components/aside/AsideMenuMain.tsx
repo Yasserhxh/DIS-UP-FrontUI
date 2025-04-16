@@ -1,83 +1,52 @@
-import { useIntl } from "react-intl";
-import { KTIcon } from "../../../helpers";
 import { AsideMenuItemWithSub } from "./AsideMenuItemWithSub";
 import { AsideMenuItem } from "./AsideMenuItem";
-
 
 interface AsideMenuMainProps {
   isCollapsed?: boolean;
 }
 
 export function AsideMenuMain({ isCollapsed = false }: AsideMenuMainProps) {
-  const intl = useIntl();
-
   return (
+    <>
+     {/* BEGIN gestion ref */}
+      <AsideMenuItemWithSub
+        to="#"
+        icon="shield-tick"
+        title="Gestion des référentiels"
+        isCollapsed={isCollapsed}
+      >
+        {/* BEGIN gestion fournisseur */}
 
-    <>    
-      
         <AsideMenuItemWithSub
           to="#"
           icon="shield-tick"
-          title="Gestion des référentiels"
+          title="Gestion des Fournisseurs"
           isCollapsed={isCollapsed}
         >
-          <AsideMenuItemWithSub
-            to="#"
-            icon="shield-tick"
-            title="Gestion des Fournisseurs"
-            isCollapsed={isCollapsed}
-          >
           <AsideMenuItem
-            to="/addFournisseur"
+            to="/add-fournisseur"
             icon="plus"
             title="Création d'un Fournisseur"
             isCollapsed={isCollapsed}
           />
           <AsideMenuItem
-            to="/liste_fournisseurs"
+            to="/fournisseurs"
             icon="list"
             title="Liste des fournisseurs"
             isCollapsed={isCollapsed}
           />
         </AsideMenuItemWithSub>
-       
-        </AsideMenuItemWithSub>
+        {/* END Gestion Fournisseur */}
+      </AsideMenuItemWithSub>
 
-    <>
+      {/* End gestion ref */}
+
       {/* <AsideMenuItem
         to="/dashboard"
         icon="element-11"
         title={intl.formatMessage({ id: 'MENU.DASHBOARD' })}
       /> */}
       {/* <AsideMenuItem to="/builder" icon="switch" title="Layout Builder" /> */}
-
-      
-
-
-
-      <AsideMenuItemWithSub
-        to="#"
-        icon="shield-tick"
-        title="Gestion d'arrivage "
-        isCollapsed={isCollapsed}
-      >
-        <AsideMenuItem
-          to="/planning"
-          title="Planning d’arrivage"
-          isCollapsed={isCollapsed}
-        />
-        <AsideMenuItem
-          to="/addarrivage"
-          title="Création d'arrivage"
-          isCollapsed={isCollapsed}
-        />
-        <AsideMenuItem
-          to="/arrivage"
-          title="Liste des arrivages"
-          isCollapsed={isCollapsed}
-        />
-      </AsideMenuItemWithSub>
     </>
   );
 }
-

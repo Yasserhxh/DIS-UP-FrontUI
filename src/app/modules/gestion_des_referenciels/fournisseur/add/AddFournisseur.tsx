@@ -111,7 +111,7 @@ const AddFournisseur: React.FC = () => {
       .then((response) => response.json())
       .then(() => navigate("/fournisseurs"));
     */
-    navigate("/liste_fournisseurs"); // Redirect back to the fournisseur list
+    navigate("/fournisseurs"); // Redirect back to the fournisseur list
   };
 
   const translate = (key: string) => key; // Placeholder for translation
@@ -151,7 +151,7 @@ const AddFournisseur: React.FC = () => {
           font-size: 0.85rem;
         }
       `}</style>
-        <div className="mb-4">
+        <div className="mb-12 mt-5">
           <h2 className="page-title mb-1 ">Créer un nouveau fournisseur</h2>
         </div>
       <Card className="border-0 shadow-sm rounded-3 p-4">
