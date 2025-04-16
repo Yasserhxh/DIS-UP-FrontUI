@@ -73,9 +73,17 @@ const AddFournisseur: React.FC = () => {
   const validateForm = (): boolean => {
     const newErrors: Partial<Fournisseur> = {};
     if (!formData.Fournisseur_Nom) newErrors.Fournisseur_Nom = "Nom est requis";
+    if (!formData.Fournisseur_Telephone) newErrors.Fournisseur_Telephone = "Telephone est requis";
     if (!formData.Fournisseur_ICE) newErrors.Fournisseur_ICE = "ICE est requis";
     if (formData.Fournisseur_Email && !/\S+@\S+\.\S+/.test(formData.Fournisseur_Email)) {
       newErrors.Fournisseur_Email = "Email invalide";
+    }
+    if( 
+      formData.Fournisseur_Telephone && 
+      !/^\+[0-9 ]{10,16}$/.test(formData.Fournisseur_Telephone
+
+      )){
+        newErrors.Fournisseur_Telephone = "Numéro de téléphone invalide";
     }
     if (
       formData.Fournisseur_ContactEmail &&
@@ -103,7 +111,7 @@ const AddFournisseur: React.FC = () => {
       .then((response) => response.json())
       .then(() => navigate("/fournisseurs"));
     */
-    navigate("/liste_fournisseurs"); // Redirect back to the fournisseur list
+    navigate("/fournisseurs"); // Redirect back to the fournisseur list
   };
 
   const translate = (key: string) => key; // Placeholder for translation
@@ -143,7 +151,7 @@ const AddFournisseur: React.FC = () => {
           font-size: 0.85rem;
         }
       `}</style>
-        <div className="mb-4">
+        <div className="mb-12 mt-5">
           <h2 className="page-title mb-1 ">Créer un nouveau fournisseur</h2>
         </div>
       <Card className="border-0 shadow-sm rounded-3 p-4">
@@ -173,7 +181,7 @@ const AddFournisseur: React.FC = () => {
               </Col>
               <Col md={4}>
                 <Form.Group>
-                  <Form.Label>{translate("Type Id")}</Form.Label>
+                  <Form.Label>{translate("Type")}</Form.Label>
                   <Form.Select
                     name="Fournisseur_TypeId"
                     value={formData.Fournisseur_TypeId}
@@ -248,7 +256,7 @@ const AddFournisseur: React.FC = () => {
             <Row className="mb-3">
               <Col md={4}>
                 <Form.Group>
-                  <Form.Label>{translate("Pays Id")}</Form.Label>
+                  <Form.Label>{translate("Pays")}</Form.Label>
                   <Form.Select
                     name="Fournisseur_PaysId"
                     value={formData.Fournisseur_PaysId}
@@ -263,7 +271,7 @@ const AddFournisseur: React.FC = () => {
               </Col>
               <Col md={4}>
                 <Form.Group>
-                  <Form.Label>{translate("Ville Id")}</Form.Label>
+                  <Form.Label>{translate("Ville")}</Form.Label>
                   <Form.Select
                     name="Fournisseur_VilleId"
                     value={formData.Fournisseur_VilleId}
@@ -294,13 +302,14 @@ const AddFournisseur: React.FC = () => {
             <Row className="mb-3">
               <Col md={6}>
                 <Form.Group>
-                  <Form.Label>{translate("Telephone")}</Form.Label>
+                  <Form.Label>{translate("Telephone")}<span className="star_red">*</span></Form.Label>
                   <Form.Control
                     type="text"
                     name="Fournisseur_Telephone"
                     value={formData.Fournisseur_Telephone}
                     onChange={handleChange}
-                    placeholder="Ex: +212 522 123 456"
+                    placeholder="Ex: +212 98 512 3456"
+                    isInvalid={!!errors.Fournisseur_Telephone}
                   />
                 </Form.Group>
               </Col>
@@ -345,6 +354,7 @@ const AddFournisseur: React.FC = () => {
                     value={formData.Fournisseur_ContactTelephone}
                     onChange={handleChange}
                     placeholder="Ex: +212 522 654 321"
+                    isInvalid={!!errors.Fournisseur_Telephone}
                   />
                 </Form.Group>
               </Col>
@@ -370,7 +380,7 @@ const AddFournisseur: React.FC = () => {
             <Row className="mb-3">
               <Col md={6}>
                 <Form.Group>
-                  <Form.Label>{translate("Devise Id")}</Form.Label>
+                  <Form.Label>{translate("Devise")}</Form.Label>
                   <Form.Select
                     name="Fournisseur_DeviseId"
                     value={formData.Fournisseur_DeviseId}
@@ -386,7 +396,7 @@ const AddFournisseur: React.FC = () => {
               </Col>
               <Col md={6}>
                 <Form.Group>
-                  <Form.Label>{translate("Mode Paiement Id")}</Form.Label>
+                  <Form.Label>{translate("Mode Paiement")}</Form.Label>
                   <Form.Select
                     name="Fournisseur_ModePaiementId"
                     value={formData.Fournisseur_ModePaiementId}
@@ -405,7 +415,7 @@ const AddFournisseur: React.FC = () => {
             <Row className="mb-3">
               <Col md={4}>
                 <Form.Group>
-                  <Form.Label>{translate("Fournisseur IBAN")}</Form.Label>
+                  <Form.Label>{translate("IBAN")}</Form.Label>
                   <Form.Control
                     type="text"
                     name="Fournisseur_IBAN"
@@ -417,7 +427,7 @@ const AddFournisseur: React.FC = () => {
               </Col>
               <Col md={4}>
                 <Form.Group>
-                  <Form.Label>{translate("Fournisseur SWIFT")}</Form.Label>
+                  <Form.Label>{translate("SWIFT")}</Form.Label>
                   <Form.Control
                     type="text"
                     name="Fournisseur_SWIFT"
@@ -429,7 +439,7 @@ const AddFournisseur: React.FC = () => {
               </Col>
               <Col md={4}>
                 <Form.Group>
-                  <Form.Label>{translate("Fournisseur RIB")}</Form.Label>
+                  <Form.Label>{translate("RIB")}</Form.Label>
                   <Form.Control
                     type="text"
                     name="Fournisseur_RIB"
@@ -445,7 +455,7 @@ const AddFournisseur: React.FC = () => {
             <Row className="mb-3">
               <Col md={6}>
                 <Form.Group>
-                  <Form.Label>{translate("Fournisseur Statut")}</Form.Label>
+                  <Form.Label>{translate("Statut")}</Form.Label>
                   <Form.Select
                     name="Fournisseur_Statut"
                     value={formData.Fournisseur_Statut}
@@ -458,7 +468,7 @@ const AddFournisseur: React.FC = () => {
               </Col>
               <Col md={6}>
                 <Form.Group>
-                  <Form.Label>{translate("Fournisseur User Id")}</Form.Label>
+                  <Form.Label>{translate("User")}</Form.Label>
                   <Form.Control
                     type="text"
                     name="Fournisseur_UserId"
@@ -474,7 +484,7 @@ const AddFournisseur: React.FC = () => {
             <Row className="mb-3">
             <Col md={6}>
                 <Form.Group>
-                  <Form.Label>{translate("Fournisseur Observations")}</Form.Label>
+                  <Form.Label>{translate("Observations")}</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={3}

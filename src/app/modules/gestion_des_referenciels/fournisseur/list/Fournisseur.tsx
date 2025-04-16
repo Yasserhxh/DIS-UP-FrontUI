@@ -4,9 +4,8 @@ import FournisseurDataTable from "./__partials/FournisseurDataTable";
 import { useNavigate } from "react-router-dom";
 import { BsPlus } from "react-icons/bs";
 
- 
 interface Fournisseur {
-  Id: any;
+  Id: string;
   Nom: string;
   ICE: string;
   PaysId: string;
@@ -18,13 +17,13 @@ interface Fournisseur {
   statut: string;
   dateArrivee: string;
 }
- 
+
 const Fournisseur: React.FC = () => {
   const [fournisseurs, setFournisseurs] = useState<Fournisseur[]>([]);
   const [filtered, setFiltered] = useState<Fournisseur[]>([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
- 
+
   useEffect(() => {
     setLoading(true);
     const fakeFournisseurs: Fournisseur[] = [
@@ -35,9 +34,9 @@ const Fournisseur: React.FC = () => {
         PaysId: "Maroc",
         Adresse: "123 Rue de l'Industrie",
         VilleId: "Casablanca",
-        ContactNom:"",
-        ContactTelephone:"",
-        ContactEmail:"",        
+        ContactNom: "",
+        ContactTelephone: "",
+        ContactEmail: "",
         statut: "activé",
         dateArrivee: "25/02/2025",
       },
@@ -48,9 +47,9 @@ const Fournisseur: React.FC = () => {
         PaysId: "Maroc",
         Adresse: "123 Rue de l'Industrie",
         VilleId: "Casablanca",
-        ContactNom:"",
-        ContactTelephone:"",
-        ContactEmail:"",        
+        ContactNom: "",
+        ContactTelephone: "",
+        ContactEmail: "",
         statut: "non activé",
         dateArrivee: "25/02/2025",
       },
@@ -61,9 +60,9 @@ const Fournisseur: React.FC = () => {
         PaysId: "Maroc",
         Adresse: "123 Rue de l'Industrie",
         VilleId: "Casablanca",
-        ContactNom:"",
-        ContactTelephone:"",
-        ContactEmail:"",        
+        ContactNom: "",
+        ContactTelephone: "",
+        ContactEmail: "",
         statut: "non activé",
         dateArrivee: "25/02/2025",
       },
@@ -74,9 +73,9 @@ const Fournisseur: React.FC = () => {
         PaysId: "Maroc",
         Adresse: "123 Rue de l'Industrie",
         VilleId: "Casablanca",
-        ContactNom:"",
-        ContactTelephone:"",
-        ContactEmail:"",        
+        ContactNom: "",
+        ContactTelephone: "",
+        ContactEmail: "",
         statut: "non activé",
         dateArrivee: "25/02/2025",
       },
@@ -87,20 +86,20 @@ const Fournisseur: React.FC = () => {
         PaysId: "Maroc",
         Adresse: "123 Rue de l'Industrie",
         VilleId: "Casablanca",
-        ContactNom:"",
-        ContactTelephone:"",
-        ContactEmail:"",        
+        ContactNom: "",
+        ContactTelephone: "",
+        ContactEmail: "",
         statut: "activé",
         dateArrivee: "25/02/2025",
       },
     ];
- 
+
     setFournisseurs(fakeFournisseurs);
     setFiltered(fakeFournisseurs);
     setLoading(false);
   }, []);
- 
-  const handleSearch = (term: string, status: string, view?: string) => {
+
+  const handleSearch = (term: string, status: string) => {
     const lowerTerm = term.toLowerCase();
     const filteredData = fournisseurs.filter((item) => {
       const matchesTerm =
@@ -112,72 +111,69 @@ const Fournisseur: React.FC = () => {
     });
     setFiltered(filteredData);
   };
- 
-  const translate = (key: string) => key;
-  const handleAddArrivageClick = () => {
-    navigate("/addFournisseur");
+
+  const handleDelete = (id: string) => {
+    const updatedFournisseurs = fournisseurs.filter((fournisseur) => fournisseur.Id !== id);
+    setFournisseurs(updatedFournisseurs);
+    setFiltered(updatedFournisseurs);
+    console.log("Suppression :", id);
   };
- 
+
+  const translate = (key: string) => key;
+  const handleAddClick = () => {
+    navigate("/add-Fournisseur");
+  };
+
   return (
     <div className="container-fluid mt-4">
-      {/* ✅ CSS intégré */}
+      {/* CSS intégré */}
       <style>{`
         .page-title {
           font-size: 2.2rem;
           font-weight: 700;
           color: #0f172a;
         }
- 
+
         .card-header-title {
           font-size: 2rem;
           font-weight: 600;
           color: #0f172a;
         }
- 
+
         .card-header-subtitle {
           color: #64748b;
           font-size: 1.1rem;
         }
- 
-        .btn-add-arrivage {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          border-radius: 10px;
-          padding: 0.65rem 1.25rem;
-          font-weight: 500;
-          font-size: 0.95rem;
-        }
       `}</style>
- 
-      {/* ✅ En-tête haut de page */}
+
+      {/* En-tête haut de page */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h2 className="page-title mb-1">Liste des fournisseurs</h2>
         </div>
-        <button className="btn btn-primary btn-add-arrivage" onClick={handleAddArrivageClick}>
-        <BsPlus className="me-2"/><span>Nouvel Fournisseur</span>
+        <button className="btn btn-primary btn-add-arrivage" onClick={handleAddClick}>
+          <BsPlus className="me-2"/><span>Nouvel Fournisseur</span>
         </button>
       </div>
- 
-      {/* ✅ Carte contenant tout le bloc */}
+
+      {/* Carte contenant tout le bloc */}
       <div className="card border-0 shadow-sm rounded-3 p-4">
         <h5 className="card-header-title mb-1">Fournisseurs</h5>
         <p className="card-header-subtitle mb-4">Liste des fournisseurs de ferraille importée</p>
- 
-        {/* ✅ Formulaire de recherche */}
+
+        {/* Formulaire de recherche */}
         <FournisseurSearchForm onSearch={handleSearch} translate={translate} />
- 
-        {/* ✅ Tableau des données */}
+
+        {/* Tableau des données */}
         <FournisseurDataTable
           data={filtered}
           loading={loading}
           translate={translate}
-          onDelete={(id) => console.log("Suppression :", id)}
+          onDelete={handleDelete}
         />
       </div>
     </div>
   );
 };
- 
+
 export default Fournisseur;

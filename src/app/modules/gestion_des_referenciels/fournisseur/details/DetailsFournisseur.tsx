@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { BsPencilSquare, BsSave, BsXCircle } from "react-icons/bs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -37,7 +37,6 @@ const DetailsFournisseur: React.FC = () => {
   const [fournisseur, setFournisseur] = useState<Fournisseur | null>(null);
   const [formData, setFormData] = useState<Fournisseur | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isEditing, setIsEditing] = useState(false);
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
     general: false,
     contact: false,
@@ -46,10 +45,16 @@ const DetailsFournisseur: React.FC = () => {
   });
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Determine the mode based on the URL
+  const isEditing = location.pathname.includes("edit");
 
   useEffect(() => {
     const fetchFournisseurDetails = async () => {
       setLoading(true);
+
+      // Fetch the supplier data
       const mockData: Fournisseur = {
         Id: id || "1",
         Nom: "CMD-2025-458",
@@ -77,25 +82,35 @@ const DetailsFournisseur: React.FC = () => {
         Observations: "Fournisseur principal de ferraille",
         dateArrivee: "25/02/2025",
       };
-
       setFournisseur(mockData);
       setFormData(mockData);
+
+      // If in edit mode, open all sections
+      if (isEditing) {
+        setOpenSections({
+          general: true,
+          contact: true,
+          bancaire: true,
+          additionnelle: true,
+        });
+      }
+
       setLoading(false);
     };
 
     fetchFournisseurDetails();
-  }, [id]);
+  }, [id, isEditing]);
 
-  const getBadgeClass = (status: string) => {
-    switch (status) {
-      case "activé":
-        return "badge badge-success";
-      case "non activé":
-        return "badge badge-danger";
-      default:
-        return "badge badge-secondary";
-    }
-  };
+  // const getBadgeClass = (status: string) => {
+  //   switch (status) {
+  //     case "activé":
+  //       return "badge badge-success";
+  //     case "non activé":
+  //       return "badge badge-danger";
+  //     default:
+  //       return "badge badge-secondary";
+  //   }
+  // };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -112,33 +127,37 @@ const DetailsFournisseur: React.FC = () => {
   };
 
   const handleEditToggle = () => {
-    setIsEditing(true);
-    setOpenSections({
-      general: true,
-      contact: true,
-      bancaire: true,
-      additionnelle: true,
-    });
+    // Navigate to edit mode
+    navigate(`/details-fournisseur/${id}/edit`);
   };
 
   const handleCancel = () => {
-    setIsEditing(false);
-    setFormData(fournisseur);
-    setOpenSections({
-      general: false,
-      contact: false,
-      bancaire: false,
-      additionnelle: false,
-    });
+    if (isEditing) {
+      // Reset form data and navigate back to view mode
+      setFormData(fournisseur);
+      setOpenSections({
+        general: false,
+        contact: false,
+        bancaire: false,
+        additionnelle: false,
+      });
+      navigate(`/details-fournisseur/${id}`); // Updated to plural
+    } else {
+      // If in view mode, go back to the list
+      navigate("/fournisseurs");
+    }
   };
 
-  const handleSave = async () => {    
+  const handleBack = () => {
+    navigate(-1);
+  };
+
+  const handleSave = async () => {
     if (!formData) return;
 
     try {
       console.log("Saving data:", formData);
       setFournisseur(formData);
-      setIsEditing(false);
       setOpenSections({
         general: false,
         contact: false,
@@ -146,7 +165,6 @@ const DetailsFournisseur: React.FC = () => {
         additionnelle: false,
       });
       navigate("/liste_fournisseurs");
-      // Here you would typically send the updated data to your API
     } catch (error) {
       console.error("Error saving fournisseur:", error);
     }
@@ -288,12 +306,15 @@ const DetailsFournisseur: React.FC = () => {
         }
       `}</style>
 
+
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="page-title mb-1">Détails du Fournisseur</h2>
+        <h2 className="page-title mb-1">
+          {isEditing ? "Modifier Fournisseur" : "Détails du Fournisseur"}
+        </h2>
         <div>
           <button
             className="btn btn-secondary btn-action"
-            onClick={() => navigate("/liste_fournisseurs")}
+            onClick={handleBack}
           >
             <span>←</span> <span>Retour</span>
           </button>

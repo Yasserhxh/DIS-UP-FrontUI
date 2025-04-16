@@ -6,17 +6,22 @@ import { DashboardWrapper } from "../pages/dashboard/DashboardWrapper";
 import { MenuTestPage } from "../pages/MenuTestPage";
 import { getCSSVariableValue } from "../../_metronic/assets/ts/_utils";
 import { WithChildren } from "../../_metronic/helpers";
-import BuilderPageWrapper from "../pages/layout-builder/BuilderPageWrapper";
-import Arrivage from "../modules/arrivages/Arrivage";
-import AddArrivage from "../modules/arrivages/AddArrivage";
-import Consultation from "../modules/arrivages/Consultation";
-import Paiement from "../modules/arrivages/Paiement ";
-import Logistique from "../modules/arrivages/Logistique";
-import Planning from "../modules/arrivages/Planning";
+ 
+import Fournisseur from "../modules/gestion_des_referenciels/fournisseur/list/Fournisseur";
+import AddFournisseur from "../modules/gestion_des_referenciels/fournisseur/add/AddFournisseur";
+import DetailsFournisseur from "../modules/gestion_des_referenciels/fournisseur/details/DetailsFournisseur";
+ 
+ 
+
+ 
+
+/* Import Fournisseur Start */
+
+/* Import Fournisseur End */
+
+/* Import Pays End */
 
 const PrivateRoutes = () => {
-  const ProfilePage = lazy(() => import("../modules/profile/ProfilePage"));
-  const WizardsPage = lazy(() => import("../modules/wizards/WizardsPage"));
   const AccountPage = lazy(() => import("../modules/accounts/AccountPage"));
   const WidgetsPage = lazy(() => import("../modules/widgets/WidgetsPage"));
   const ChatPage = lazy(() => import("../modules/apps/chat/ChatPage"));
@@ -31,6 +36,7 @@ const PrivateRoutes = () => {
         <Route path="auth/*" element={<Navigate to="/arrivage" />} />
         {/* Pages */}
         <Route path="dashboard" element={<DashboardWrapper />} />
+ 
         {/* <Route
           path="builder"
           element={
@@ -39,62 +45,23 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         /> */}
-
         {/* <Route path="menu-test" element={<MenuTestPage />} /> */}
-        {/* />
-        <Route
-          path='addFournisseur'
-          element={
-            <SuspensedView>
-              <AddFournisseurPage/>
-            </SuspensedView>
-          }
-        />        
-         <Route
-          path='liste_fournisseurs'
-          element={
-            <SuspensedView>
-              <FournisseurPage/>
-            </SuspensedView>
-          }
-        />
-        <Route
-          path='details_fournisseurs'
-          element={
-            <SuspensedView>
-              <DetailsFournisseurPage/>
-            </SuspensedView>
-          }
-        />
-        <Route
-          path='Modifier_fournisseurs'
-          element={
-            <SuspensedView>
-              <UpdateFournisseurPage/>
-            </SuspensedView>
-          }
-        /> */}
 
         <Route path="menu-test" element={<MenuTestPage />} />
         {/* Lazy Modules */}
-        {/* <Route
-          path="crafted/pages/profile/*"
-          element={
-            <SuspensedView>
-              <ProfilePage />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path="crafted/pages/wizards/*"
-          element={
-            <SuspensedView>
-              <WizardsPage />
-            </SuspensedView>
-          }
-        />
+        <Route path="menu-test" element={<MenuTestPage />} />
+ 
+        
+        
+
+
+
+        
+         
+
         <Route path='menu-test' element={<MenuTestPage />} />
-        {/* Lazy Modules */}
+        
+ 
 
         <Route
           path="crafted/widgets/*"
@@ -103,7 +70,11 @@ const PrivateRoutes = () => {
               <WidgetsPage />
             </SuspensedView>
           }
+ 
         />
+ 
+ 
+ 
         <Route
           path="crafted/account/*"
           element={
@@ -111,7 +82,9 @@ const PrivateRoutes = () => {
               <AccountPage />
             </SuspensedView>
           }
+ 
         />
+ 
         <Route
           path="apps/chat/*"
           element={
@@ -120,6 +93,8 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
+ 
+
         <Route
           path="apps/user-management/*"
           element={
@@ -129,63 +104,43 @@ const PrivateRoutes = () => {
           }
         />
 
-        {/* <Route
-                path='pays'
-                element={
-                  <SuspensedView>
-                    <Pays />
-                  </SuspensedView>
-                }
-              /> */}
+        {/*BEGIN Fourniseur Routes*/}
+        <Route
+          path="fournisseurs"
+          element={
+            <SuspensedView>
+              <Fournisseur />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path="add-fournisseur"
+          element={
+            <SuspensedView>
+              <AddFournisseur />
+            </SuspensedView>
+          }
+        />
+ 
+ 
+        <Route
+          path="details-fournisseur/:id"
+          element={
+            <SuspensedView>
+              <DetailsFournisseur />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path="details-fournisseur/:id/edit"
+          element={
+            <SuspensedView>
+              <DetailsFournisseur />
+            </SuspensedView>
+          }
+        />
 
-        <Route
-          path="arrivage"
-          element={
-            <SuspensedView>
-              <Arrivage />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path="planning"
-          element={
-            <SuspensedView>
-              <Planning />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path="addarrivage"
-          element={
-            <SuspensedView>
-              <AddArrivage />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path="/consultation/:id"
-          element={
-            <SuspensedView>
-              <Consultation />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path="/paiement/:id"
-          element={
-            <SuspensedView>
-              <Paiement />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path="/logistique/:id"
-          element={
-            <SuspensedView>
-              <Logistique />
-            </SuspensedView>
-          }
-        />
+        {/*END Fourniseur Routes*/}
 
         {/* Page Not Found */}
         <Route path="*" element={<Navigate to="/error/404" />} />
