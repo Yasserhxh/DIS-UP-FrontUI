@@ -181,7 +181,7 @@ const AddFournisseur: React.FC = () => {
               </Col>
               <Col md={4}>
                 <Form.Group>
-                  <Form.Label>{translate("Type Id")}</Form.Label>
+                  <Form.Label>{translate("Type")}</Form.Label>
                   <Form.Select
                     name="Fournisseur_TypeId"
                     value={formData.Fournisseur_TypeId}
@@ -468,7 +468,7 @@ const AddFournisseur: React.FC = () => {
               </Col>
               <Col md={6}>
                 <Form.Group>
-                  <Form.Label>{translate("User Id")}</Form.Label>
+                  <Form.Label>{translate("User")}</Form.Label>
                   <Form.Control
                     type="text"
                     name="Fournisseur_UserId"

@@ -6,7 +6,6 @@ import { DashboardWrapper } from "../pages/dashboard/DashboardWrapper";
 import { MenuTestPage } from "../pages/MenuTestPage";
 import { getCSSVariableValue } from "../../_metronic/assets/ts/_utils";
 import { WithChildren } from "../../_metronic/helpers";
-import BuilderPageWrapper from "../pages/layout-builder/BuilderPageWrapper";
 import Arrivage from "../modules/arrivages/Arrivage";
 import AddArrivage from "../modules/arrivages/AddArrivage";
 import Consultation from "../modules/arrivages/Consultation";
@@ -45,22 +44,8 @@ const PrivateRoutes = () => {
         <Route path="auth/*" element={<Navigate to="/arrivage" />} />
         {/* Pages */}
         <Route path="dashboard" element={<DashboardWrapper />} />
-        {/* <Route
-          path="builder"
-          element={
-            <SuspensedView>
-              <BuilderPageWrapper />
-            </SuspensedView>
-          }
-        /> */}
-
-        {/* <Route path="menu-test" element={<MenuTestPage />} /> */}
-
-
-        {/* Route To Fournisseur Start */}    
-
-        {/* />
-
+        
+        {/* Route To Fournisseur Start */}  
         <Route
           path='liste_fournisseurs'
           element={
@@ -80,20 +65,6 @@ const PrivateRoutes = () => {
         <Route
 
           path='details_fournisseurs/:id'
-
-          path='Modifier_fournisseurs'
-          element={
-            <SuspensedView>
-              <UpdateFournisseurPage/>
-            </SuspensedView>
-          }
-        /> */}
-
-        <Route path="menu-test" element={<MenuTestPage />} />
-        {/* Lazy Modules */}
-        {/* <Route
-          path="crafted/pages/profile/*"
-
           element={
             <SuspensedView>
               <DetailsFournisseurPage/>
@@ -127,9 +98,6 @@ const PrivateRoutes = () => {
           }
 
         /> 
-
-        />
-
         <Route
           path="crafted/account/*"
           element={
@@ -137,13 +105,8 @@ const PrivateRoutes = () => {
               <AccountPage />
             </SuspensedView>
           }
-
         /> 
-      <Route
-
-        />
         <Route
-
           path="apps/chat/*"
           element={
             <SuspensedView>
@@ -151,32 +114,6 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
-
-       <Route
-
-        <Route
-
-          path="apps/user-management/*"
-          element={
-            <SuspensedView>
-              <UsersPage />
-            </SuspensedView>
-          }
-
-        /> 
-
-        />
-
-        {/* <Route
-                path='pays'
-                element={
-                  <SuspensedView>
-                    <Pays />
-                  </SuspensedView>
-                }
-              /> */}
-
-
         <Route
           path="arrivage"
           element={
