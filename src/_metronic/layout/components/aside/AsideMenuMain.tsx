@@ -7,6 +7,7 @@ interface AsideMenuMainProps {
 
 export function AsideMenuMain({ isCollapsed = false }: AsideMenuMainProps) {
   return (
+ 
     <>
      {/* BEGIN gestion ref */}
       <AsideMenuItemWithSub
@@ -47,6 +48,7 @@ export function AsideMenuMain({ isCollapsed = false }: AsideMenuMainProps) {
         title={intl.formatMessage({ id: 'MENU.DASHBOARD' })}
       /> */}
       {/* <AsideMenuItem to="/builder" icon="switch" title="Layout Builder" /> */}
+ 
     </>
   );
 }

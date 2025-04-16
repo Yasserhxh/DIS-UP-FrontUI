@@ -6,9 +6,14 @@ import { DashboardWrapper } from "../pages/dashboard/DashboardWrapper";
 import { MenuTestPage } from "../pages/MenuTestPage";
 import { getCSSVariableValue } from "../../_metronic/assets/ts/_utils";
 import { WithChildren } from "../../_metronic/helpers";
+ 
 import Fournisseur from "../modules/gestion_des_referenciels/fournisseur/list/Fournisseur";
 import AddFournisseur from "../modules/gestion_des_referenciels/fournisseur/add/AddFournisseur";
 import DetailsFournisseur from "../modules/gestion_des_referenciels/fournisseur/details/DetailsFournisseur";
+ 
+ 
+
+ 
 
 /* Import Fournisseur Start */
 
@@ -31,6 +36,7 @@ const PrivateRoutes = () => {
         <Route path="auth/*" element={<Navigate to="/arrivage" />} />
         {/* Pages */}
         <Route path="dashboard" element={<DashboardWrapper />} />
+ 
         {/* <Route
           path="builder"
           element={
@@ -44,6 +50,18 @@ const PrivateRoutes = () => {
         <Route path="menu-test" element={<MenuTestPage />} />
         {/* Lazy Modules */}
         <Route path="menu-test" element={<MenuTestPage />} />
+ 
+        
+        
+
+
+
+        
+         
+
+        <Route path='menu-test' element={<MenuTestPage />} />
+        
+ 
 
         <Route
           path="crafted/widgets/*"
@@ -52,8 +70,11 @@ const PrivateRoutes = () => {
               <WidgetsPage />
             </SuspensedView>
           }
+ 
         />
-
+ 
+ 
+ 
         <Route
           path="crafted/account/*"
           element={
@@ -61,8 +82,9 @@ const PrivateRoutes = () => {
               <AccountPage />
             </SuspensedView>
           }
+ 
         />
-
+ 
         <Route
           path="apps/chat/*"
           element={
@@ -71,6 +93,7 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
+ 
 
         <Route
           path="apps/user-management/*"
@@ -98,7 +121,8 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
-
+ 
+ 
         <Route
           path="details-fournisseur/:id"
           element={
