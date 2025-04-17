@@ -13,7 +13,7 @@ interface Arrivage {
   statut: string;
   dateArrivee: string;
   nomNavire: string;
-  lastDateOfShipment?: string; // ✅ ajouté ici
+  lastDateOfShipment?: string;
 }
 
 const Arrivage: React.FC = () => {
@@ -102,41 +102,11 @@ const Arrivage: React.FC = () => {
 
   const translate = (key: string) => key;
   const handleAddArrivageClick = () => {
-    navigate("/addarrivage");
+    navigate("/add-arrivage");
   };
 
   return (
     <div className="container-fluid mt-4">
-      {/* ✅ CSS intégré */}
-      <style>{`
-        .page-title {
-          font-size: 2.2rem;
-          font-weight: 700;
-          color: #0f172a;
-        }
-
-        .card-header-title {
-          font-size: 2rem;
-          font-weight: 600;
-          color: #0f172a;
-        }
-
-        .card-header-subtitle {
-          color: #64748b;
-          font-size: 1.1rem;
-        }
-
-        .btn-add-arrivage {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          border-radius: 10px;
-          padding: 0.65rem 1.25rem;
-          font-weight: 500;
-          font-size: 0.95rem;
-        }
-      `}</style>
-
       {/* ✅ En-tête haut de page */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>

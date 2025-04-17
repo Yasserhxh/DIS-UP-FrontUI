@@ -12,63 +12,6 @@ const ArrivageSearchForm: React.FC<SearchFormProps> = ({
 }) => {
   return (
     <div className="card-body">
-      {/* CSS intégré avec champs plus grands */}
-      <style>
-        {`
-        .search-form .form-control,
-        .search-form .form-select {
-            border-radius: 12px;
-            border: 1px solid #dee2e6;
-            padding: 1rem 1.25rem;
-            font-size: 1rem;
-            height: 54px;
-        }
-
-        .search-form .form-control::placeholder {
-            color: #adb5bd;
-            font-size: 0.95rem;
-        }
-
-        /*  Bouton filtre avec bordure propre et effet hover */
-        .search-form .btn-filter i {
-        border: 2px solid #dee2e6; 
-        border-radius: 6px;        
-        padding: 15px;             
-        font-size: 1rem;          
-        }
-
-
-
-        .search-form .btn-filter:hover i{
-        background-color: #fc5421;
-        }
-
-
-        .search-icon-wrapper {
-            position: relative;
-        }
-
-        .search-icon-wrapper i {
-            position: absolute;
-            top: 50%;
-            left: 16px;
-            transform: translateY(-50%);
-            color: rgb(189, 173, 173);
-            font-size: 1.2rem;
-        }
-
-        .search-icon-wrapper input {
-            padding-left: 2.5rem !important;
-        }
-
-        @media (max-width: 768px) {
-            .search-form .row > div {
-            margin-bottom: 1rem;
-            }
-        }
-        `}
-      </style>
-
       <Formik
         initialValues={{ searchTerm: "", status: "", view: "" }}
         onSubmit={(values) => {

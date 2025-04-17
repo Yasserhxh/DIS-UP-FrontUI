@@ -11,60 +11,13 @@ import {
   Col,
   Spinner,
 } from "react-bootstrap";
-import {
-  BsFileEarmarkText,
-  BsSearch,
-  BsThreeDotsVertical,
-  BsTrash,
-  BsUpload,
-} from "react-icons/bs";
+import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 const AddArrivage: React.FC = () => {
   const [searchCommandeQuery, setSearchCommandeQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("nominationNavire");
-  const [typeDocument, setTypeDocument] = useState("");
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [typeDocumentNavire, setTypeDocumentNavire] = useState("");
-  const [documentsNomination, setDocumentsNomination] = useState<File[]>([]);
-  const [documentsQualification, setDocumentsQualification] = useState<File[]>(
-    []
-  );
-
-  const [qualificationForm, setQualificationForm] = useState({
-    date: "",
-    conforme: false,
-    commentaire: "",
-  });
-  const [qualificationHistorique, setQualificationHistorique] = useState<any[]>(
-    []
-  );
-
-  const [typePieceQualification, setTypePieceQualification] = useState("");
-  const [surveillants, setSurveillants] = useState<any[]>([]);
-  const [surveillantForm, setSurveillantForm] = useState({ pays: "", nom: "" });
-  const handleUploadClick = (context: "nomination" | "qualification") => {
-    if (fileInputRef.current) {
-      fileInputRef.current.onchange = (e: any) => {
-        const files = Array.from(e.target.files as File[]);
-        if (files.length) {
-          if (context === "nomination") {
-            setDocumentsNomination((prev) => [...prev, ...files]);
-          } else if (context === "qualification") {
-            setDocumentsQualification((prev) => [...prev, ...files]);
-          }
-        }
-        e.target.value = ""; // ✅ maintenant dans la portée
-      };
-
-      fileInputRef.current.click(); // ✅ toujours ici
-    }
-  };
-
-  const paysOptions = ["Maroc", "France", "Espagne", "Italie"];
-  const surveillantOptions = ["SGS Maroc", "Bureau Veritas", "Intertek"];
   const [commandes, setCommandes] = useState<
     {
       id: string;
@@ -79,14 +32,8 @@ const AddArrivage: React.FC = () => {
       incoterm: string;
     }[]
   >([]);
-
-  const removeSurveillant = (index: number) => {
-    setSurveillants((prev) => prev.filter((_, i) => i !== index));
-  };
-
   const handleSearchCommande = () => {
     setIsSearching(true);
-    // Simuler un appel API
     setTimeout(() => {
       setCommandes([
         {
@@ -223,21 +170,7 @@ const AddArrivage: React.FC = () => {
           </Card.Body>
         </div>
       </Card>
-      <style>{`
 
-
-        .card-header-title {
-          font-size: 2rem;
-          font-weight: 600;
-          color: #0f172a;
-        }
-
-        .card-header-subtitle {
-          color: #64748b;
-          font-size: 1.1rem;
-        }
-
-      `}</style>
       {/* ✅ FORMULAIRE D’ARRIVAGE */}
       <Card className="mt-3">
         <div className="card border-0 shadow-sm rounded-3 p-8 ">

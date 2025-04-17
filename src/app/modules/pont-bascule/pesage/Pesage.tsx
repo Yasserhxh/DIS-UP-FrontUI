@@ -20,7 +20,7 @@ const Pesage: React.FC = () => {
     navire: "",
     dum: "",
     commande: "",
-    radio: "", // ❌ par défaut non sélectionné
+    radio: "",
     poids: "0.000",
     commentaire: "",
   });
@@ -35,8 +35,8 @@ const Pesage: React.FC = () => {
       navire: "NAV-" + matricule.slice(0, 3),
       dum: "DUM-" + Math.floor(Math.random() * 10000),
       commande: "CMD-" + Math.floor(Math.random() * 99999),
-      radio: "", // pas de valeur par défaut
-      poids: (Math.random() * 10 + 5).toFixed(3), // valeur simulée entre 5 et 15 tonnes
+      radio: "",
+      poids: (Math.random() * 10 + 5).toFixed(3),
       commentaire: "",
     });
   };
@@ -52,25 +52,6 @@ const Pesage: React.FC = () => {
 
   return (
     <div className="container-fluid mt-4">
-      <style>{`
-        .poids-display {
-          background-color: #000;
-          color: #00cc66;
-          font-size: 3.5rem;
-          padding: 20px 40px;
-          border-radius: 10px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          font-family: 'Courier New', monospace;
-        }
-        .poids-display .unit {
-          font-size: 1.2rem;
-          margin-left: 8px;
-          color: white;
-        }
-      `}</style>
-
       <div className="card shadow-sm border rounded-3 p-4">
         <div className="row">
           {/* 👉 Liste à gauche */}

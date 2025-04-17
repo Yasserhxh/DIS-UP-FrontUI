@@ -53,34 +53,6 @@ const DataTableShifts: React.FC<DataTableShiftsProps> = ({
 
   return (
     <div>
-      <style>{`
-        .p-datatable {
-          border: 1px solid #dee2e6;
-          border-radius: 8px;
-          overflow: hidden;
-          font-size: 0.95rem;
-        }
-
-        .p-datatable .p-datatable-thead > tr > th {
-          background-color: #f8f9fa;
-          padding: 1rem;
-          font-weight: 600;
-          color: #495057;
-          font-size: 0.95rem;
-          border-right: none !important;
-          border-bottom: 1px solid #dee2e6;
-        }
-
-        .p-datatable .p-datatable-tbody > tr > td {
-          padding: 1rem;
-          border: none;
-        }
-
-        .p-datatable .p-datatable-tbody > tr {
-          border-bottom: 1px solid #dee2e6;
-        }
-      `}</style>
-
       <DataTable value={shifts} responsiveLayout="scroll">
         <Column
           field="id"
