@@ -42,6 +42,54 @@ export function AsideMenuMain({ isCollapsed = false }: AsideMenuMainProps) {
 
       {/* End gestion ref */}
 
+      {/* Gestion d'arrivage */}
+      <AsideMenuItemWithSub
+        to="#"
+        icon="shield-tick"
+        title="Gestion d'arrivage "
+        isCollapsed={isCollapsed}
+      >
+        {/* <AsideMenuItem
+          to="/planning"
+          title="Planning d’arrivage"
+          isCollapsed={isCollapsed}
+        /> */}
+        <AsideMenuItem
+          to="/add-arrivage"
+          title="Création d'arrivage"
+          isCollapsed={isCollapsed}
+        />
+        <AsideMenuItem
+          to="/arrivage"
+          title="Liste des arrivages"
+          isCollapsed={isCollapsed}
+        />
+      </AsideMenuItemWithSub>
+
+      {/* Pont à bascule  */}
+      <AsideMenuItemWithSub
+        to="#"
+        icon="shield-tick"
+        title="Pont à bascule "
+        isCollapsed={isCollapsed}
+      >
+        <AsideMenuItem
+          to="/shifts"
+          title="Gestion des shifts "
+          isCollapsed={isCollapsed}
+        />
+        <AsideMenuItem 
+          to="/pesage" 
+          title="Pesage" 
+          isCollapsed={isCollapsed} 
+        />
+        <AsideMenuItem
+          to="/parametrage"
+          title="Parametrage"
+          isCollapsed={isCollapsed}
+        />
+      </AsideMenuItemWithSub>
+
       {/* <AsideMenuItem
         to="/dashboard"
         icon="element-11"

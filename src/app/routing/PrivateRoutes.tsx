@@ -10,6 +10,14 @@ import { WithChildren } from "../../_metronic/helpers";
 import Fournisseur from "../modules/gestion_des_referenciels/fournisseur/list/Fournisseur";
 import AddFournisseur from "../modules/gestion_des_referenciels/fournisseur/add/AddFournisseur";
 import DetailsFournisseur from "../modules/gestion_des_referenciels/fournisseur/details/DetailsFournisseur";
+import Arrivage from "../modules/arrivages/Arrivage";
+import AddArrivage from "../modules/arrivages/AddArrivage";
+import Consultation from "../modules/arrivages/Consultation";
+import Paiement from "../modules/arrivages/Paiement ";
+import Logistique from "../modules/arrivages/Logistique";
+import GestionShifts from "../modules/pont-bascule/gestion-des-shifts/GestionShifts";
+import Pesage from "../modules/pont-bascule/pesage/Pesage";
+import Parametrage from "../modules/pont-bascule/parametrage/Parametrage";
  
  
 
@@ -139,8 +147,87 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
+        
 
         {/*END Fourniseur Routes*/}
+
+        {/* Begin Arrivage */}
+        <Route
+          path="arrivage"
+          element={
+            <SuspensedView>
+              <Arrivage />
+            </SuspensedView>
+          }
+        />
+        {/* <Route
+          path="planning"
+          element={
+            <SuspensedView>
+              <Planning />
+            </SuspensedView>
+          }
+        /> */}
+        <Route
+          path="add-arrivage"
+          element={
+            <SuspensedView>
+              <AddArrivage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path="/consultation/:id"
+          element={
+            <SuspensedView>
+              <Consultation />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path="/paiement/:id"
+          element={
+            <SuspensedView>
+              <Paiement />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path="/logistique/:id"
+          element={
+            <SuspensedView>
+              <Logistique />
+            </SuspensedView>
+          }
+        />
+        {/* End Arrivage */}
+
+        {/* Begin Pont bascule */}
+        <Route
+          path="shifts"
+          element={
+            <SuspensedView>
+              <GestionShifts />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path="pesage"
+          element={
+            <SuspensedView>
+              <Pesage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path="parametrage"
+          element={
+            <SuspensedView>
+              <Parametrage />
+            </SuspensedView>
+          }
+        />
+        {/* End Pont bascule */}
 
         {/* Page Not Found */}
         <Route path="*" element={<Navigate to="/error/404" />} />
