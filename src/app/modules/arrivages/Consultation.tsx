@@ -1,14 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Form,
-  Button,
-  Card,
-  Accordion,
-  Table,
-} from "react-bootstrap";
+import { Row, Col, Form, Button, Card, Table } from "react-bootstrap";
 import { BsFileEarmarkText, BsTrash, BsUpload } from "react-icons/bs";
 
 const Consultation: React.FC = () => {
@@ -65,10 +57,10 @@ const Consultation: React.FC = () => {
             setDocumentsQualification((prev) => [...prev, ...files]);
           }
         }
-        e.target.value = ""; // ✅ maintenant dans la portée
+        e.target.value = "";
       };
 
-      fileInputRef.current.click(); // ✅ toujours ici
+      fileInputRef.current.click();
     }
   };
 

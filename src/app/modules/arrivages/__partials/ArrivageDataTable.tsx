@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ import navigation
+import { useNavigate } from "react-router-dom"; 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Dropdown } from "react-bootstrap";
@@ -38,7 +38,7 @@ const ArrivageDataTable: React.FC<PaysDataTableProps> = ({
 }) => {
   const [first, setFirst] = useState(0);
   const pageSize = 10;
-  const navigate = useNavigate(); // ✅ initialize navigation
+  const navigate = useNavigate(); 
 
   const StatutTemplate = (rowData: Arrivage) => {
     const getBadgeClass = (status: string) => {
@@ -105,61 +105,6 @@ const ArrivageDataTable: React.FC<PaysDataTableProps> = ({
 
   return (
     <div>
-      <style>{`
-        .p-datatable {
-          border: 1px solid #dee2e6;
-          border-radius: 8px;
-          overflow: hidden;
-          font-size: 0.95rem;
-        }
-
-        .p-datatable .p-datatable-thead > tr > th {
-          background-color: #f8f9fa;
-          padding: 1rem;
-          font-weight: 600;
-          color: #495057;
-          font-size: 0.95rem;
-          border-right: none !important;
-          border-bottom: 1px solid #dee2e6;
-        }
-
-        .p-datatable .p-datatable-tbody > tr > td {
-          padding: 1rem;
-          border: none;
-        }
-
-        .p-datatable .p-datatable-tbody > tr {
-          border-bottom: 1px solid #dee2e6;
-        }
-
-        .badge-status {
-          padding: 0.3rem 0.75rem;
-          border-radius: 999px;
-          font-size: 0.75rem;
-          font-weight: 500;
-        }
-
-        .badge-danger {
-          background-color:#fc5421;
-          color: white;
-        }
-
-        .badge-light {
-          background-color: #f1f3f5;
-          color: #495057;
-        }
-
-        .badge-secondary {
-          background-color: #dee2e6;
-          color: #495057;
-        }
-
-        .badge-muted {
-          background-color: #e9ecef;
-          color: #6c757d;
-        }
-      `}</style>
-
       <DataTable
         value={data}
         paginator

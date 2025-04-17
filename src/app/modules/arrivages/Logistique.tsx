@@ -202,23 +202,6 @@ const Logistique: React.FC = () => {
     },
   ];
 
-  const BANK_OPTIONS = [
-    "Attijariwafa Bank",
-    "BMCE Bank (Bank of Africa)",
-    "Banque Centrale Populaire",
-    "CIH Bank",
-    "Société Générale Maroc",
-    "Crédit du Maroc",
-    "CFG Bank",
-    "Al Barid Bank",
-  ];
-  const PAYMENT_MODE_OPTIONS = [
-    "Virement bancaire",
-    "Lettre de crédit",
-    "Chèque",
-    "Espèces",
-  ];
-
   useEffect(() => {
     setArrivage({
       description: "Arrivage de ferraille E1 et E2",
@@ -275,11 +258,6 @@ const Logistique: React.FC = () => {
   };
   const handleRemoveFile = (index: number) => {
     setAttachments((prevFiles) => prevFiles.filter((_, i) => i !== index));
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    alert("Paiement enregistré avec succès !");
   };
 
   if (!arrivage) return <div>Chargement...</div>;

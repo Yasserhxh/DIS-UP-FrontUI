@@ -37,33 +37,6 @@ const Parametrage: React.FC = () => {
 
   return (
     <div className="container-fluid mt-4">
-      <style>{`
-        .form-container {
-          border-radius: 18px;
-          box-shadow: 0 0 0 1px #e0e0e0;
-          padding: 2.5rem;
-          background-color: #fff;
-        }
-        .form-title {
-          font-size: 1.8rem;
-          font-weight: 700;
-          color: #0f172a;
-          margin-bottom: 1.5rem;
-        }
-        .form-tab .nav-link.active {
-          background-color: #fc5421;
-          color: #fff;
-          border: none;
-        }
-        .form-tab .nav-link {
-          border: none;
-          color: #0f172a;
-        }
-        .table th, .table td {
-          vertical-align: middle;
-        }
-      `}</style>
-
       <div className="form-container">
         <h4 className="form-title">⚙️ Paramétrage des éléments</h4>
 

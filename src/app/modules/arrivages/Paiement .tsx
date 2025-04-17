@@ -52,23 +52,6 @@ const Paiement: React.FC = () => {
     );
   };
 
-  const BANK_OPTIONS = [
-    "Attijariwafa Bank",
-    "BMCE Bank (Bank of Africa)",
-    "Banque Centrale Populaire",
-    "CIH Bank",
-    "Société Générale Maroc",
-    "Crédit du Maroc",
-    "CFG Bank",
-    "Al Barid Bank",
-  ];
-  const PAYMENT_MODE_OPTIONS = [
-    "Virement bancaire",
-    "Lettre de crédit",
-    "Chèque",
-    "Espèces",
-  ];
-
   useEffect(() => {
     setArrivage({
       description: "Arrivage de ferraille E1 et E2",
